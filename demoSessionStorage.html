@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const persons = [
+            { name: 'Nguyen Van A', age: 18 },
+            { name: 'Nguyen Van B', age: 20 },
+            { name: 'Nguyen Van C', age: 21 }
+        ]
+        sessionStorage.setItem("persons", JSON.stringify(persons));
+        let personsSesion = JSON.parse(sessionStorage.getItem("persons"));
+        console.log(personsSesion);
+        sessionStorage.removeItem("persons");
+        sessionStorage.clear();
+
+        // cookies
+        document.cookie = "username=JavaScript Partime,password=12345678; expires=Thu, 05 Jan 2024 23:59:00 UTC; path=/";
+        let mycookies = document.cookie
+        console.log(mycookies);
+    </script>
+</body>
+
+</html>

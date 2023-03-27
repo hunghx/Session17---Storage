@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container {
+        font-size: 20px;
+        width: 500px;
+        margin: 30px auto;
+        background-color: orange;
+        border-radius: 5px;
+        border: 1px solid black;
+        padding: 10px;
+        text-align: center;
+    }
+
+    ul>li {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    span {
+        border: 1px solid black;
+    }
+</style>
+
+<body>
+    <div class="container">
+
+        <div>
+            <input type="text" id="search" oninput="handleSearch()">
+        </div>
+        <form>
+            <input type="text" id="todo" placeholder="Nhâp todo list">
+            <button onclick="handleAdd()">Add</button>
+        </form>
+
+        <hr>
+        <h3>Danh sách việc cần làm</h3>
+        <ul id="list" style="text-align: left;">
+            <!-- <li>đi chơi <span>X</span></li> -->
+        </ul>
+    </div>
+    <script>
+        let listUser = [
+            { id: 1, username: "hunghx99", password: "123456" },
+            { id: 2, username: "hunghx98", password: "123456" },
+            { id: 3, username: "hunghx97", password: "123456" },
+            { id: 4, username: "hunghx98", password: "123456" },
+            { id: 5, username: "hunghx99", password: "123456" }
+        ]
+
+        let todoList = JSON.parse(localStorage.getItem("todolist")) || [];
+
+
+        // chức năng hiển thị
+        function displayData(array) {
+            let string = ""
+            for (let i = 0; i < array.length; i++) {
+                string += `<li>${array[i]} <span onclick="handleUpdate(${i})">E</span> <span onclick="handleDelete(${i})">X</span></li>`
+            }
+            document.getElementById("list").innerHTML = string;
+        }
+        displayData(todoList);
+
+
+        // chức năng thêm mới
+        function handleAdd() {
+            let value = document.getElementById("todo").value;
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+
+            if (value.trim() !== "") {
+                todoList.push(value)
+                let newUser = {}
+                if (listUser.length === 0) {
+                    newUser.id = 1
+                } else {
+
+                    newUser.id = listUser[listUser.length - 1].id + 1
+
+                }
+                newUser.username = username
+                newUser.password = password
+                //{ id: 5, username: "hunghx99", password: "123456" }
+                listUser.push(newUser)
+                localStorage.setItem("todolist", JSON.stringify(todoList))
+                displayData(todoList);
+                document.getElementById("todo").value = "";
+            }
+        }
+        // xoá
+        function handleDelete(index) {
+            if (!confirm("bạn có chắc chắn muốn xoá không")) {
+                return
+            }
+            for (let i = 0; i < todoList.length; i++) {
+                if (i === index) {
+                    //xoá phần tử này
+                    todoList.splice(i, 1)
+                    localStorage.setItem("todolist", JSON.stringify(todoList))
+                    displayData(todoList);
+                }
+            }
+        }
+        // update
+        function handleUpdate(index) {
+            for (let i = 0; i < todoList.length; i++) {
+                if (i === index) {
+                    todoList[i] = prompt("Giá trị cũ là " + todoList[i] + ". Giá trị mới là ")
+                    localStorage.setItem("todolist", JSON.stringify(todoList))
+                    displayData(todoList);
+                }
+            }
+        }
+        // tìm kiếm
+
+        function handleSearch() {
+            value = document.getElementById("search").value;
+            let listSearch = []
+            for (let i = 0; i < todoList.length; i++) {
+                if (todoList[i].includes(value)) {
+                    listSearch.push(todoList[i])
+                }
+            }
+            displayData(listSearch)
+
+        }
+
+
+    </script>
+</body>
+
+</html>

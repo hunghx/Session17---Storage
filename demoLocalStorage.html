@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // thêm mới 1 key value
+        let obj = {
+            name: "hùng",
+            age: 18
+        }
+        const persons = [
+            { name: 'Nguyen Van A', age: 18 },
+            { name: 'Nguyen Van B', age: 20 },
+            { name: 'Nguyen Van C', age: 21 }
+        ]
+        localStorage.setItem("number", 10);
+        localStorage.setItem("string", "Mười");
+        localStorage.setItem("boolean", true);
+        localStorage.setItem("user", JSON.stringify(obj));
+        let user = JSON.parse(localStorage.getItem("user"))
+        console.log(user.name)
+        // lấy ra 1 item theo kry
+        let number = localStorage.getItem("numbers");
+        // alert(number)
+        // xoá 1 item
+        // localStorage.removeItem("number")
+        // xoá tất cả dữ liệu trên local
+        // localStorage.clear()
+        localStorage.setItem("array", JSON.stringify(persons))
+    </script>
+</body>
+
+</html>
