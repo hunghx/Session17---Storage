@@ -1,0 +1,26 @@
+.container {
+  width: 500px;
+  background-color: brown;
+  border-radius: 10px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  padding: 20px 30px;
+  margin: 20px auto;
+}
+h2 {
+  text-align: center;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+input {
+  flex: 1 1 100px;
+  max-width: 300px;
+}
+
+button {
+  width: 100px;
+  box-sizing: border-box;
+}

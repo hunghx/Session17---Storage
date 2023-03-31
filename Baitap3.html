@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Sign In</h2>
+        <div>
+
+            <div class="row">
+                <label for="username">username</label>
+                <input type="text" id="username" />
+            </div>
+            <div class="row">
+                <label for="password">Password</label>
+                <input type="text" id="password" />
+            </div>
+
+            <div style="text-align: center;">
+                <button onclick="login()">Sign In</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let user = JSON.parse(localStorage.getItem("user"));
+        function login() {
+            let inputs = document.getElementsByTagName("input");
+            let username = inputs[0].value;
+            let pass = inputs[1].value
+            if (username.trim() === "" || pass.trim() === "") {
+                alert("Khong duoc bo trong")
+                return
+            }
+            if (username === user.username && pass === user.password) {
+                alert("đăng nhập thành cong")
+                sessionStorage.setItem("user-login", JSON.stringify({ "username": username, "password": pass }))
+
+            } else {
+                alert("Sai tài khoản hoặc mật khẩu")
+            }
+        }
+    </script>
+</body>
+
+</html>
